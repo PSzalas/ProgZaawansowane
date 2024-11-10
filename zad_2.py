@@ -4,8 +4,11 @@ def numbers_function(listOfNumbers):
 
     return listOfNumbers
 
+
 def numbers_function2(listOfNumbers):
+
     return [number * 2 for number in listOfNumbers]
+
 
 listOfNumbers2 = [1, 2, 3, 4, 5]
 listOfNumbers3 = [1, 2, 3, 4, 5]
