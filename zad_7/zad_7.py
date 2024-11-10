@@ -3,6 +3,7 @@ import json
 
 from Brewery import Brewery
 
+
 def fetchBreweries():
     url = "https://api.openbrewerydb.org/breweries?per_page=20"
     headers = {'User-Agent': 'Mozilla/5.0'}
@@ -23,6 +24,7 @@ def fetchBreweries():
     except urllib.error.URLError as e:
         print(f"Błąd połączenia z API: {e}")
         return []
+
 
 breweriesList = fetchBreweries()
 

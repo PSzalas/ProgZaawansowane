@@ -4,6 +4,7 @@ import argparse
 
 from zad_7.Brewery import Brewery
 
+
 def fetchBreweries(city=None):
     url = "https://api.openbrewerydb.org/breweries"
 
@@ -32,8 +33,10 @@ def fetchBreweries(city=None):
         return []
 
 
-parser = argparse.ArgumentParser(description='pobierz browary z Open Browary DB')
-parser.add_argument('--city', type=str, help='Filtruj po nazwie miasta')
+parser = argparse.ArgumentParser(
+    description='pobierz browary z Open Browary DB')
+parser.add_argument('--city', type=str,
+                    help='Filtruj po nazwie miasta')
 
 args = parser.parse_args()
 
