@@ -10,12 +10,15 @@ class Library:
         self.phone = phone
 
     def __str__(self):
-        return (f"Adres biblioteki: {self.city}, {self.street}, {self.zip_code}\n"
-                f"Godziny otwarcia: {self.open_hours}\nNumer kontaktowy: {self.phone}")
+        return (f"Adres biblioteki: {self.city}, {self.street},"
+                f" {self.zip_code}\n"
+                f"Godziny otwarcia: {self.open_hours}\n"
+                f"Numer kontaktowy: {self.phone}")
 
 
 class Employee:
-    def __init__(self, first_name, last_name, hire_date, birth_date, city, street, zip_code, phone):
+    def __init__(self, first_name, last_name, hire_date,
+                 birth_date, city, street, zip_code, phone):
         self.first_name = first_name
         self.last_name = last_name
         self.hire_date = hire_date
@@ -27,12 +30,16 @@ class Employee:
 
     def __str__(self):
         return (f"Pracownik: {self.first_name} {self.last_name}\n"
-                f"Data zatrudnienia: {self.hire_date}\nData urodzenia: {self.birth_date}\n"
-                f"Adres zamieszkania: {self.city}, {self.street}, {self.zip_code}\nNumer kontaktowy: {self.phone}")
+                f"Data zatrudnienia: {self.hire_date}\n"
+                f"Data urodzenia: {self.birth_date}\n"
+                f"Adres zamieszkania: {self.city}, {self.street},"
+                f" {self.zip_code}\n"
+                f"Numer kontaktowy: {self.phone}")
 
 
 class Book:
-    def __init__(self, library, publication_date, author_name, author_surname, number_of_pages):
+    def __init__(self, library, publication_date, author_name,
+                 author_surname, number_of_pages):
         self.library = library
         self.publication_date = publication_date
         self.author_name = author_name
@@ -40,8 +47,10 @@ class Book:
         self.number_of_pages = number_of_pages
 
     def __str__(self):
-        return (f"Autor {self.author_name} {self.author_surname}, Data publikacji: {self.publication_date}\n"
-                f"Liczba stron: {self.number_of_pages}\nBiblioteka: {self.library}")
+        return (f"Autor {self.author_name} {self.author_surname}, "
+                f"Data publikacji: {self.publication_date}\n"
+                f"Liczba stron: {self.number_of_pages}\n"
+                f"Biblioteka: {self.library}")
 
 
 class Student:
@@ -73,14 +82,22 @@ class Order:
 
 
 # Tworzenie obiektów
-library1 = Library("Warszawa", "Śródmieście 3", "00-001", "9-17", "123-456-789")
-library2 = Library("Kraków", "Stare miasto 5", "30-002", "10-18", "987-654-321")
+library1 = Library("Warszawa", "Śródmieście 3",
+                   "00-001", "9-17", "123-456-789")
+library2 = Library("Kraków", "Stare miasto 5",
+                   "30-002", "10-18", "987-654-321")
 
-employee1 = Employee("Patryk", "Nowak", date(2021, 1, 15), date(1990, 5, 20), "Warszawa", "Poniatowskiego 5", "00-003",
+employee1 = Employee("Patryk", "Nowak",
+                     date(2021, 1, 15), date(1990, 5, 20),
+                     "Warszawa", "Poniatowskiego 5", "00-003",
                      "111-222-333")
-employee2 = Employee("Anna", "Kowalska", date(2020, 6, 30), date(1985, 8, 15), "Kraków", "Piłsudskiego 2", "30-004",
+employee2 = Employee("Anna", "Kowalska",
+                     date(2020, 6, 30), date(1985, 8, 15),
+                     "Kraków", "Piłsudskiego 2", "30-004",
                      "444-555-666")
-employee3 = Employee("Piotr", "Wiśniewski", date(2022, 9, 10), date(1995, 12, 10), "Warszawa", "Mickiewicza 10", "00-005",
+employee3 = Employee("Piotr", "Wiśniewski",
+                     date(2022, 9, 10), date(1995, 12, 10),
+                     "Warszawa", "Mickiewicza 10", "00-005",
                      "777-888-999")
 
 book1 = Book(library1, date(2010, 6, 15), "Adam", "Mickiewicz", 300)

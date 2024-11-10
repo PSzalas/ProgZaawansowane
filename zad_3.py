@@ -7,7 +7,9 @@ class Property:
 
     def __str__(self):
         return (f"Adres nieruchomości: {self.address}\n"
-                f"Powierzchnia: {self.area} m2, Liczba pokoi: {self.rooms}, Cena: {self.price} PLN")
+                f"Powierzchnia: {self.area} m2, "
+                f"Liczba pokoi: {self.rooms}, "
+                f"Cena: {self.price} PLN")
 
 
 class House(Property):
