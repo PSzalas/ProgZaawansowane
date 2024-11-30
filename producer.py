@@ -4,6 +4,7 @@ import uuid
 
 DB_NAME = 'queues_on_sqlite.db'
 
+
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -17,6 +18,7 @@ def init_db():
     ''')
     conn.commit()
     conn.close()
+
 
 def add_task():
     task_id = str(uuid.uuid4())
@@ -32,6 +34,7 @@ def add_task():
     conn.close()
 
     print(f"Zadanie zostało zapisane w bazie danych {DB_NAME}")
+
 
 if __name__ == "__main__":
     init_db()

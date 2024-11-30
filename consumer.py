@@ -3,13 +3,16 @@ import time
 
 DB_NAME = 'queues_on_sqlite.db'
 
+
 def read_tasks():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
-    cursor.execute('SELECT id, description, status FROM tasks ORDER BY timestamp ASC')
+    cursor.execute('SELECT id, description, status '
+                   'FROM tasks ORDER BY timestamp ASC')
     tasks = cursor.fetchall()
     conn.close()
     return tasks
+
 
 def update_task_status(task_id: str, new_status: str):
     conn = sqlite3.connect(DB_NAME)
@@ -21,6 +24,7 @@ def update_task_status(task_id: str, new_status: str):
     updated = cursor.rowcount > 0
     conn.close()
     return updated
+
 
 def consume_task():
     tasks = read_tasks()
@@ -35,6 +39,7 @@ def consume_task():
             print(f"Zakończono zadanie: {description} (id: {task_id})")
             return True
     return False
+
 
 if __name__ == "__main__":
     print("Consumer uruchomiony.")

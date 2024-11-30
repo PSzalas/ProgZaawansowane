@@ -10,7 +10,8 @@ def read_tasks():
 
     tasks = cursor.fetchall()
     for task in tasks:
-        print(f"ID: {task[0]}, Description: {task[1]}, Status: {task[2]}, Timestamp: {task[3]}")
+        print(f"ID: {task[0]}, Description: {task[1]},"
+              f"Status: {task[2]}, Timestamp: {task[3]}")
 
     conn.close()
 
