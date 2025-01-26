@@ -48,15 +48,9 @@ def check_status(task_id: str) -> Union[Task, str]:
     task_info = Task()
     task_info.task_id = task_id
 
-    # Search for the file in the results directory
-    # that matches task_id in its name
     for filename in os.listdir(RESULTS_DIR):
-        # Check if the filename matches the pattern
-        # "[task_id]-[number_of_people].jpg"
         if filename.startswith(f"[{task_id}]-"):
             try:
-                # Example filename:
-                # "bb12ce21-bb0b-4a90-a7aa-b9340717e6a8-5.jpg"
                 base_name, ext = os.path.splitext(filename)
                 task_info.image_path = os.path.join(RESULTS_DIR, filename)
                 task_info.number_of_people = (
@@ -71,30 +65,25 @@ def check_status(task_id: str) -> Union[Task, str]:
 
 def detect_people(image_path: str) -> PROCESSEDIMAGE:
     try:
-        # Load YOLO
         net = cv2.dnn.readNet(f'{MODELS_DIR}/yolov4/yolov4.weights',
                               f'{MODELS_DIR}/yolov4/yolov4.cfg')
         layer_names = net.getLayerNames()
         output_layers = [layer_names[i - 1] for i in
                          net.getUnconnectedOutLayers()]
 
-        # Load COCO class labels (person is class ID 0 in COCO)
         with open(f'{MODELS_DIR}/yolov4/coco.names', 'r') as f:
             classes = [line.strip() for line in f.readlines()]
 
-        # Read image
         image = cv2.imread(image_path)
         if image is None:
             raise ValueError("Image not found or cannot be read.")
 
         height, width, _ = image.shape
 
-        # Prepare the image for YOLO
         blob = cv2.dnn.blobFromImage(image, 0.00392, (416, 416), (0, 0, 0),
                                      True, crop=False)
         net.setInput(blob)
 
-        # Run YOLO detection
         detections = net.forward(output_layers)
 
         boxes = []
@@ -108,8 +97,7 @@ def detect_people(image_path: str) -> PROCESSEDIMAGE:
                 scores = detection[5:]
                 class_id = np.argmax(scores)
                 confidence = scores[class_id]
-                if confidence > 0.5:  # Only consider person confidence > 0.5
-                    # COCO class for 'person'
+                if confidence > 0.5:
                     if classes[class_id] == 'person':
                         person_count += 1
                         center_x = int(detection[0] * width)
@@ -117,7 +105,6 @@ def detect_people(image_path: str) -> PROCESSEDIMAGE:
                         w = int(detection[2] * width)
                         h = int(detection[3] * height)
 
-                        # Rectangle coordinates
                         x = int(center_x - w / 2)
                         y = int(center_y - h / 2)
 
@@ -125,19 +112,15 @@ def detect_people(image_path: str) -> PROCESSEDIMAGE:
                         confidences.append(float(confidence))
                         class_ids.append(class_id)
 
-        # Apply Non-Maximum Suppression to remove redundant overlapping boxes
         indices = cv2.dnn.NMSBoxes(boxes, confidences,
                                    score_threshold=0.5, nms_threshold=0.4)
 
         person_count = len(indices)
-        # Draw bounding boxes around people
         if len(indices) > 0:
             for i in indices:
-                x, y, w, h = boxes[i]  # Use the index to get the bounding box
-                # Draw the bounding box
+                x, y, w, h = boxes[i]
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        # Save the result image
         if not os.path.exists(RESULTS_DIR):
             os.makedirs(RESULTS_DIR)
 
